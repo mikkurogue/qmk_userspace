@@ -43,7 +43,7 @@ Activated by holding D+F or J+K combo.
 .------.------.------.------.------.          .------.------.------.------.------.
 |  1   |  2   |  3   |  4   |  5   |          |  6   |  7   |  8   |  9   |  0   |
 |------+------+------+------+------|          |------+------+------+------+------|
-|  a   |  o   |  e   |      |      |          |  <-  |  v   |  ^   |  ->  |      |
+|  ä   |  å   |  ö   |      |      |          |  <-  |  v   |  ^   |  ->  |      |
 |------+------+------+------+------|          |------+------+------+------+------|
 |      |      |      | ESC  | TAB  |          |      |      |      |      |      |
 '------'------'------+------+------+------.  .------+------+------'------'------'
@@ -51,7 +51,7 @@ Activated by holding D+F or J+K combo.
                      '------'------'------'  '------'------'------'
 ```
 
-- `a`, `o`, `e` = `RALT(KC_Q)`, `RALT(KC_W)`, `RALT(KC_P)` (special characters)
+- `ä`, `å`, `ö` = `RALT(KC_Q)`, `RALT(KC_W)`, `RALT(KC_P)` (special characters) this is due to requirement of typing finnish or swedish and needing simple access to these keys. Requires host OS input to allow for `us intl altgr` variation.
 - Arrows on right home row
 
 ### Layer 2: SYM (RGB: purple)
