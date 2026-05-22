@@ -13,6 +13,13 @@ Corne v4.1 (crkbd rev4_1) standard layout with Callum-style one-shot mods.
 - **Tri-layer** — hold EXT + SYM simultaneously to activate FUNC layer
 - **RGB per layer** — color-coded layer indicators on both halves
 
+
+## Visual map
+
+<img width="900" height="1709" alt="my_keymap" src="https://github.com/user-attachments/assets/fa24e71d-bab8-4426-ac3c-b1868175899e" />
+
+
+
 ## Layers
 
 ### Layer 0: BASE (default RGB animation)
