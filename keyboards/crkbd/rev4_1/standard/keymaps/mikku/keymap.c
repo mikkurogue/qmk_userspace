@@ -80,10 +80,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // │ SYM — symbols + Callum mods on right home row                      │
     // └─────────────────────────────────────────────────────────────────────┘
     [_SYM] = LAYOUT_split_3x6_3_ex2(
-        KC_NO,   KC_TILD, KC_EQL,  KC_PLUS, KC_LCBR, KC_PERC, KC_NO,       KC_NO,   KC_AMPR, KC_RCBR, KC_ASTR, KC_EXLM, KC_AT,   KC_NO,
-        KC_NO,   KC_GRV,  KC_COLN, KC_UNDS, KC_MINS, KC_LBRC, KC_NO,       KC_NO,   KC_RBRC, OS_CTRL, OS_SHFT, OS_ALT,  OS_GUIC, KC_NO,
-        KC_NO,   KC_PIPE, KC_SCLN, KC_HASH, KC_LPRN, KC_LABK,                       KC_RABK, KC_RPRN, KC_CIRC, KC_DLR,  KC_BSLS, KC_NO,
-                                   _______, _______, KC_SPC,                         KC_ENT,  _______, _______
+        KC_NO,   KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_NO,       KC_NO,   KC_CIRC, KC_AMPR, KC_ASTR, KC_EQL,  KC_TILD, KC_NO,
+        KC_NO,   KC_GRV,  KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, KC_NO,       KC_NO,   KC_COLN, OS_CTRL, OS_SHFT, OS_ALT,  OS_GUIC, KC_NO,
+        KC_NO,   KC_PIPE, KC_LABK, KC_RABK, KC_LBRC, KC_RBRC,                       KC_SCLN, KC_MINS, KC_UNDS, KC_PLUS, KC_BSLS, KC_NO,
+                               _______, _______, KC_SPC,                         KC_ENT,  _______, _______
     ),
 
     // ┌─────────────────────────────────────────────────────────────────────┐
