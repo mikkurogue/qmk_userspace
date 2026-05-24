@@ -16,8 +16,7 @@ Corne v4.1 (crkbd rev4_1) standard layout with Callum-style one-shot mods.
 
 ## Visual map
 
-<img width="900" height="1709" alt="my_keymap" src="https://github.com/user-attachments/assets/fa24e71d-bab8-4426-ac3c-b1868175899e" />
-
+<img width="900" height="1709" alt="my_keymap(1)" src="https://github.com/user-attachments/assets/7443a50c-a19c-4a84-99ae-eb7b2eba7bb0" />
 
 
 ## Layers
