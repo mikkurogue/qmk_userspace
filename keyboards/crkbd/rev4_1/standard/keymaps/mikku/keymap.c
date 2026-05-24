@@ -1,3 +1,4 @@
+#include "keycodes.h"
 #include QMK_KEYBOARD_H
 #include "oneshot.h"
 
@@ -92,8 +93,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_EXT] = LAYOUT_split_3x6_3_ex2(
         KC_NO,   KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, KC_INS,  KC_NO,       KC_NO,   KC_INS,  KC_PGDN, KC_PGUP, XXXXXXX, XXXXXXX, KC_NO,
         KC_NO,   OS_GUIC, OS_ALT,  OS_SHFT, OS_CTRL, XXXXXXX, KC_NO,       KC_NO,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_DEL,  KC_NO,
-        KC_NO,   XXXXXXX, XXXXXXX, KC_TAB,  KC_ESC,  XXXXXXX,                       XXXXXXX, KC_BSPC, KC_HOME, KC_END,  KC_PSCR, KC_NO,
-                                   _______, _______, _______,                        KC_ENT,  _______, _______
+        KC_NO,   XXXXXXX, KC_ESC, XXXXXXX,  KC_ESC,  KC_TAB,                       XXXXXXX, KC_BSPC, KC_HOME, KC_END,  KC_PSCR, KC_NO,
+                                   _______, _______, KC_SPC,                        KC_ENT,  _______, _______
     ),
 
     // ┌─────────────────────────────────────────────────────────────────────┐
@@ -103,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,   KC_STOP, KC_MPLY, KC_VOLD, KC_VOLU, KC_MUTE, KC_NO,       KC_NO,   XXXXXXX, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_NO,
         KC_NO,   OS_GUIC, OS_ALT,  OS_SHFT, OS_CTRL, XXXXXXX, KC_NO,       KC_NO,   KC_BRIU, KC_F4,   KC_F5,   KC_F6,   KC_F11,  KC_NO,
         KC_NO,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       KC_BRID, KC_F1,   KC_F2,   KC_F3,   KC_F12,  KC_NO,
-                                   _______, _______, _______,                        KC_ENT,  _______, _______
+                                   _______, _______, KC_SPC,                        KC_ENT,  _______, _______
     ),
 };
 // clang-format on
