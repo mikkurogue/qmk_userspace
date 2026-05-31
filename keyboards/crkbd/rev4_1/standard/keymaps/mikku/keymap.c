@@ -1,6 +1,9 @@
 #include "keycodes.h"
+#include "keymap_us.h"
+#include "quantum_keycodes.h"
 #include QMK_KEYBOARD_H
 #include "oneshot.h"
+#include "shortcuts.h"
 
 // Layer definitions
 enum custom_layers {
@@ -23,8 +26,7 @@ enum keycodes {
     OS_GUIC,
 };
 
-// ── Combos ──────────────────────────────────────────────────────────────────
-
+// Combos
 enum combos {
     DF_NUM,
     JK_NUM,
@@ -64,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_NO,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_NO,       KC_NO,   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_NO,
         KC_NO,   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_NO,       KC_NO,   KC_H,    KC_J,    KC_K,    KC_L,    KC_QUOT, KC_NO,
         KC_NO,   KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                          KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_NO,
-                                   LA_EXT,  OSM(MOD_LSFT), KC_SPC,        KC_ENT,  LA_SYM,  KC_BSPC
+                                   LA_EXT,  KC_LSFT, KC_SPC,        KC_ENT,  LA_SYM,  KC_BSPC
     ),
 
     // ┌─────────────────────────────────────────────────────────────────────┐
@@ -81,19 +83,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // │ SYM — symbols + Callum mods on right home row                      │
     // └─────────────────────────────────────────────────────────────────────┘
     [_SYM] = LAYOUT_split_3x6_3_ex2(
-        KC_NO,   KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_NO,       KC_NO,   KC_CIRC, KC_AMPR, KC_ASTR, KC_EQL,  KC_TILD, KC_NO,
-        KC_NO,   KC_GRV,  KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, KC_NO,       KC_NO,   KC_COLN, OS_CTRL, OS_SHFT, OS_ALT,  OS_GUIC, KC_NO,
-        KC_NO,   KC_PIPE, KC_LABK, KC_RABK, KC_LBRC, KC_RBRC,                       KC_SCLN, KC_MINS, KC_UNDS, KC_PLUS, KC_BSLS, KC_NO,
+        KC_NO,   KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_UNDS, KC_NO,       KC_NO,   KC_CIRC, KC_AMPR, KC_ASTR, KC_EQL,  KC_GRV,  KC_NO,
+        KC_NO,   KC_LCBR, KC_LPRN, KC_LBRC, KC_SCLN, KC_NO, KC_NO,       KC_NO,   KC_NO, KC_COLN, KC_RBRC, KC_RPRN,  KC_RCBR, KC_NO,
+        KC_NO,   XXXXXXX, KC_BSLS, KC_PERC, KC_LBRC, KC_RBRC,                       KC_PLUS, KC_MINS, KC_PIPE, XXXXXXX, KC_TILD, KC_NO,
                                _______, _______, KC_SPC,                         KC_ENT,  _______, _______
     ),
 
     // ┌─────────────────────────────────────────────────────────────────────┐
-    // │ EXT — navigation + Callum mods on left home row                    │
+    // │ EXT — shortcuts + Callum mods on left home row                     │
     // └─────────────────────────────────────────────────────────────────────┘
     [_EXT] = LAYOUT_split_3x6_3_ex2(
-        KC_NO,   KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, KC_INS,  KC_NO,       KC_NO,   KC_INS,  KC_PGDN, KC_PGUP, XXXXXXX, XXXXXXX, KC_NO,
-        KC_NO,   OS_GUIC, OS_ALT,  OS_SHFT, OS_CTRL, XXXXXXX, KC_NO,       KC_NO,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_DEL,  KC_NO,
-        KC_NO,   XXXXXXX, KC_ESC, XXXXXXX,  KC_ESC,  KC_TAB,                       XXXXXXX, KC_BSPC, KC_HOME, KC_END,  KC_PSCR, KC_NO,
+        KC_NO,   KC_ESC,  XXXXXXX, NXT_WND, PRV_WND, KC_INS,  KC_NO,       KC_NO,   WM_MOVL, WM_MOVR, KC_PGUP, XXXXXXX, XXXXXXX, KC_NO,
+        KC_NO,   OS_GUIC, OS_ALT,  OS_SHFT, OS_CTRL, XXXXXXX, KC_NO,       KC_NO,   _______, _______, _______, _______, KC_DEL,  KC_NO,
+        KC_NO,   XXXXXXX, KC_ESC,  KC_ESC,  XXXXXXX, KC_TAB,                        WM_WSL,  WM_WSR,  KC_HOME, KC_END,  KC_PSCR, KC_NO,
                                    _______, _______, KC_SPC,                        KC_ENT,  _______, _______
     ),
 
@@ -109,14 +111,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-// ── Tri-layer: EXT + SYM = FUNC ────────────────────────────────────────────
-
+// Tri-layer: EXT + SYM = FUNC
 layer_state_t layer_state_set_user(layer_state_t state) {
+    shortcuts_layer_state_update(state);
     return update_tri_layer_state(state, _EXT, _SYM, _FUNC);
 }
 
-// ── Caps Word: which keys continue caps word ────────────────────────────────
-
+// Caps Word: which keys continue caps word
 bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {
         case KC_A ... KC_Z:
@@ -133,8 +134,7 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-// ── Callum One-Shot Mods ────────────────────────────────────────────────────
-
+// Callum One-Shot Mods
 bool is_oneshot_cancel_key(uint16_t keycode) {
     switch (keycode) {
         case LA_SYM:
@@ -171,10 +171,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     update_oneshot(&os_alt_state,  KC_LALT, OS_ALT,  keycode, record);
     update_oneshot(&os_gui_state,  KC_LGUI, OS_GUIC, keycode, record);
 
+    if (!process_shortcuts(keycode, record)) {
+        return false;
+    }
+
     return true;
 }
-
-// ── RGB per layer ───────────────────────────────────────────────────────────
 
 #ifdef RGB_MATRIX_ENABLE
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {

@@ -1,6 +1,8 @@
 {
     "userspace_version": "1.0",
     "build_targets": [
-        ["crkbd/rev4_1/standard", "mikku"]
+        ["crkbd/rev4_1/standard", "mikku"],
+        ["bastardkb/dilemma/3x5_3_procyon", "mikku"],
+        ["bastardkb/dilemma/3x5_3_procyon", "vendor"]
     ]
 }

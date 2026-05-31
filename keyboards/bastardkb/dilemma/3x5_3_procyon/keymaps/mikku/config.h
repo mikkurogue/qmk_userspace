@@ -1,0 +1,9 @@
+#pragma once
+
+#define COMBO_MUST_HOLD_PER_COMBO
+#define COMBO_ONLY_FROM_LAYER 0
+#define COMBO_TERM 50
+
+#define ONESHOT_TIMEOUT 3000
+
+#define SPLIT_LAYER_STATE_ENABLE
