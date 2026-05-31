@@ -12,12 +12,7 @@ Corne v4.1 (crkbd rev4_1) standard layout with Callum-style one-shot mods.
 - **OSM Shift** on left thumb — tap for one-shot, hold for regular shift
 - **Tri-layer** — hold EXT + SYM simultaneously to activate FUNC layer
 - **RGB per layer** — color-coded layer indicators on both halves
-
-
-## Visual map
-
-<img width="900" height="1709" alt="my_keymap(1)" src="https://github.com/user-attachments/assets/7443a50c-a19c-4a84-99ae-eb7b2eba7bb0" />
-
+- **OS-aware shortcuts** — niri window management on Linux, no-op on macOS; app switcher adapts per OS
 
 ## Layers
 
@@ -35,7 +30,7 @@ Corne v4.1 (crkbd rev4_1) standard layout with Callum-style one-shot mods.
                      '------'------'------'  '------'------'------'
 ```
 
-- **EXT** = `MO(_EXT)` — hold for navigation + left-side Callum mods
+- **EXT** = `MO(_EXT)` — hold for shortcuts + left-side Callum mods
 - **SYM** = `MO(_SYM)` — hold for symbols + right-side Callum mods
 - **SHFT** = `OSM(MOD_LSFT)` — tap = one-shot shift, hold = regular shift
 - **D+F** or **J+K** (combo hold) = `MO(_NUM)` — numbers + nav
@@ -49,7 +44,7 @@ Activated by holding D+F or J+K combo.
 .------.------.------.------.------.          .------.------.------.------.------.
 |  1   |  2   |  3   |  4   |  5   |          |  6   |  7   |  8   |  9   |  0   |
 |------+------+------+------+------|          |------+------+------+------+------|
-|  ä   |  å   |  ö   |      |      |          |  <-  |  v   |  ^   |  ->  |      |
+|  ae  |  aa  |  oe  |      |      |          |  <-  |  v   |  ^   |  ->  |      |
 |------+------+------+------+------|          |------+------+------+------+------|
 |      |      |      | ESC  | TAB  |          |      |      |      |      |      |
 '------'------'------+------+------+------.  .------+------+------'------'------'
@@ -57,7 +52,7 @@ Activated by holding D+F or J+K combo.
                      '------'------'------'  '------'------'------'
 ```
 
-- `ä`, `å`, `ö` = `RALT(KC_Q)`, `RALT(KC_W)`, `RALT(KC_P)` (special characters) this is due to requirement of typing finnish or swedish and needing simple access to these keys. Requires host OS input to allow for `us intl altgr` variation.
+- `ae`, `aa`, `oe` = `RALT(KC_Q)`, `RALT(KC_W)`, `RALT(KC_P)` (Finnish/Swedish characters, requires `us intl altgr` input on host)
 - Arrows on right home row
 
 ### Layer 2: SYM (RGB: purple)
@@ -66,18 +61,19 @@ Activated by holding right thumb SYM key.
 
 ```
 .------.------.------.------.------.          .------.------.------.------.------.
-|  !   |  @   |  #   |  $   |  %   |          |  ^   |  &   |  *   |  =   |  ~   |
+|  !   |  @   |  #   |  $   |  _   |          |  ^   |  &   |  *   |  =   |  `   |
 |------+------+------+------+------|          |------+------+------+------+------|
-|  `   |  {   |  }   |  (   |  )   |          |  :   | CTRL | SHFT | ALT  | GUI  |
+|  {   |  }   |  (   |  )   |  ;   |          |  :   | CTRL | SHFT | ALT  | GUI  |
 |------+------+------+------+------|          |------+------+------+------+------|
-|  |   |  <   |  >   |  [   |  ]   |          |  ;   |  -   |  _   |  +   |  \   |
+|      |  \   |  %   |  [   |  ]   |          |  +   |  -   |  |   |      |  ~   |
 '------'------'------+------+------+------.  .------+------+------'------'------'
                      |      |      | SPC  |  | ENT  |      |      |
                      '------'------'------'  '------'------'------'
 ```
 
 - **Callum mods on right home row** (CTRL, SHFT, ALT, GUI)
-- Bracket pairs adjacent on left hand: `{} () <> []`, optimized for TS/Go/Rust
+- Bracket pairs: `{} () []` on left home row, `< >` available via shifted `,` `.` on alpha
+- `_` on index top for easy `snake_case`; `= + -` in accessible positions
 
 ### Layer 3: EXT (RGB: green)
 
@@ -85,18 +81,21 @@ Activated by holding left thumb EXT key.
 
 ```
 .------.------.------.------.------.          .------.------.------.------.------.
-| ESC  |      |      |      | INS  |          | INS  | PGDN | PGUP |      |      |
+| ESC  |      | NXT> | <PRV | INS  |          | MOVL | MOVR | PGUP |      |      |
 |------+------+------+------+------|          |------+------+------+------+------|
-| GUI  | ALT  | SHFT | CTRL |      |          |  <-  |  v   |  ^   |  ->  | DEL  |
+| GUI  | ALT  | SHFT | CTRL |      |          |      |      |      |      | DEL  |
 |------+------+------+------+------|          |------+------+------+------+------|
-|      |      | TAB  | ESC  |      |          |      | BSPC | HOME | END  | PSCR |
+|      | ESC  | ESC  |      | TAB  |          | WSL  | WSR  | HOME | END  | PSCR |
 '------'------'------+------+------+------.  .------+------+------'------'------'
-                     |      |      |      |  | ENT  |      |      |
+                     |      |      | SPC  |  | ENT  |      |      |
                      '------'------'------'  '------'------'------'
 ```
 
 - **Callum mods on left home row** (GUI, ALT, SHFT, CTRL)
-- Navigation on right side
+- **NXT>/\<PRV** = Stateful app switcher — holds `Alt` (Linux) or `Cmd` (macOS) while you tap to cycle through windows. Releasing the EXT layer key confirms your selection.
+- **MOVL/MOVR** = Move window left/right (`Super+Ctrl+H`/`Super+Ctrl+L`, niri, Linux only)
+- **WSL/WSR** = Move window to workspace left/right (`Super+Shift+Ctrl+H`/`Super+Shift+Ctrl+L`, niri, Linux only)
+- All niri shortcuts are no-ops on macOS
 
 ### Layer 4: FUNC (RGB: red)
 
@@ -133,7 +132,7 @@ Unlike QMK's built-in `OSM()`, these custom one-shot mods have **no timeout** an
 
 | Layer | Color | Hex |
 |-------|-------|-----|
-| BASE  | Default animation | — |
+| BASE  | Default animation | -- |
 | NUM   | Blue   | `#0000FF` |
 | SYM   | Purple | `#7F00FF` |
 | EXT   | Green  | `#00FF00` |
