@@ -11,12 +11,30 @@ enum custom_layers {
     _POINTER,
 };
 
+#define BASE _BASE
+#define NUM _NUM
+
 #define LA_SYM MO(_SYM)
 #define LA_EXT MO(_EXT)
 
 #define PT_Z LT(_POINTER, KC_Z)
 #define PT_SLSH LT(_POINTER, KC_SLSH)
 #define BSP_SYM LT(_SYM, KC_BSPC)
+
+#define QWERTY LAYOUT_split_3x5_3( \
+    KC_Q,    KC_W,    KC_F,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, \
+    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,       KC_H,    KC_J,    KC_K,    KC_L,    KC_QUOT, \
+    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M,    KC_COMM, KC_DOT,  PT_SLSH, \
+              LA_EXT,  KC_LSFT, KC_SPC,              KC_ENT,  BSP_SYM, KC_DEL \
+)
+
+
+#define COLEMAK LAYOUT_split_3x5_3( \
+    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,       KC_J,    KC_L,    KC_U,    KC_Y,    KC_QUOT, \
+    KC_A,    KC_R,    KC_S,    KC_T,    KC_G,       KC_M,    KC_N,    KC_E,    KC_I,    KC_O, \
+    PT_Z,    KC_X,    KC_C,    KC_D,    KC_V,       KC_K,    KC_H,    KC_COMM, KC_DOT,  PT_SLSH, \
+              LA_EXT,  KC_LSFT, KC_SPC,              KC_ENT,  BSP_SYM, KC_DEL \
+)
 
 enum keycodes {
     OS_SHFT = SAFE_RANGE,
@@ -26,25 +44,25 @@ enum keycodes {
 };
 
 enum combos {
-    DF_NUM,
-    JK_NUM,
+    ST_NUM,
+    NE_NUM,
     BN_CAPSWORD,
 };
 
-const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
-const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM st_combo[] = {KC_S, KC_T, COMBO_END};
+const uint16_t PROGMEM ne_combo[] = {KC_N, KC_E, COMBO_END};
 const uint16_t PROGMEM bn_combo[] = {KC_B, KC_N, COMBO_END};
 
 combo_t key_combos[] = {
-    [DF_NUM]       = COMBO(df_combo, MO(_NUM)),
-    [JK_NUM]       = COMBO(jk_combo, MO(_NUM)),
+    [ST_NUM]       = COMBO(st_combo, MO(NUM)),
+    [NE_NUM]       = COMBO(ne_combo, MO(NUM)),
     [BN_CAPSWORD]  = COMBO(bn_combo, CW_TOGG),
 };
 
 bool get_combo_must_hold(uint16_t combo_index, combo_t *combo) {
     switch (combo_index) {
-        case DF_NUM:
-        case JK_NUM:
+        case ST_NUM:
+        case NE_NUM:
             return true;
         default:
             return false;
@@ -53,14 +71,9 @@ bool get_combo_must_hold(uint16_t combo_index, combo_t *combo) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    [_BASE] = LAYOUT_split_3x5_3(
-        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
-        KC_A,    KC_S,    KC_D,    KC_F,    KC_G,       KC_H,    KC_J,    KC_K,    KC_L,    KC_QUOT,
-        PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M,    KC_COMM, KC_DOT,  PT_SLSH,
-                  LA_EXT,  KC_LSFT, KC_SPC,              KC_ENT, BSP_SYM, KC_DEL
-    ),
+    [BASE] = COLEMAK,
 
-    [_NUM] = LAYOUT_split_3x5_3(
+    [NUM] = LAYOUT_split_3x5_3(
         KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
         RALT(KC_Q), RALT(KC_W), RALT(KC_P), XXXXXXX, XXXXXXX,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, KC_ESC,  KC_TAB,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
