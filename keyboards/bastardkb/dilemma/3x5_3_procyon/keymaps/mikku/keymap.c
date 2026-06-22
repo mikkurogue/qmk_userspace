@@ -16,6 +16,7 @@ enum custom_layers {
 
 #define PT_Z LT(_POINTER, KC_Z)
 #define PT_SLSH LT(_POINTER, KC_SLSH)
+#define BSP_SYM LT(_SYM, KC_BSPC)
 
 enum keycodes {
     OS_SHFT = SAFE_RANGE,
@@ -56,14 +57,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
         KC_A,    KC_S,    KC_D,    KC_F,    KC_G,       KC_H,    KC_J,    KC_K,    KC_L,    KC_QUOT,
         PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M,    KC_COMM, KC_DOT,  PT_SLSH,
-                  LA_EXT,  KC_LSFT, KC_SPC,              KC_ENT, KC_BSPC, LA_SYM
+                  LA_EXT,  KC_LSFT, KC_SPC,              KC_ENT, BSP_SYM, KC_DEL
     ),
 
     [_NUM] = LAYOUT_split_3x5_3(
         KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
         RALT(KC_Q), RALT(KC_W), RALT(KC_P), XXXXXXX, XXXXXXX,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, KC_ESC,  KC_TAB,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                  KC_DEL,  KC_TAB,  KC_SPC,              KC_ENT,  KC_BSPC, KC_BSPC
+                  KC_DEL,  KC_TAB,  KC_SPC,              KC_ENT,  KC_BSPC, KC_DEL
     ),
 
     [_SYM] = LAYOUT_split_3x5_3(
