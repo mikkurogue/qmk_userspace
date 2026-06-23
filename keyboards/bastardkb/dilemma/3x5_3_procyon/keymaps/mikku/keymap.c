@@ -14,6 +14,10 @@ enum custom_layers {
 #define BASE _BASE
 #define NUM _NUM
 
+// -- Layout selection (uncomment one) --
+// #define USE_COLEMAK
+#define USE_QWERTY
+
 #define LA_SYM MO(_SYM)
 #define LA_EXT MO(_EXT)
 
@@ -22,10 +26,10 @@ enum custom_layers {
 #define BSP_SYM LT(_SYM, KC_BSPC)
 
 #define QWERTY LAYOUT_split_3x5_3( \
-    KC_Q,    KC_W,    KC_F,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, \
+    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, \
     KC_A,    KC_S,    KC_D,    KC_F,    KC_G,       KC_H,    KC_J,    KC_K,    KC_L,    KC_QUOT, \
     PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M,    KC_COMM, KC_DOT,  PT_SLSH, \
-              LA_EXT,  KC_LSFT, KC_SPC,              KC_ENT,  BSP_SYM, KC_DEL \
+              LA_EXT,  KC_LSFT, KC_SPC,              KC_ENT,  LA_SYM, KC_BSPC \
 )
 
 
@@ -33,7 +37,7 @@ enum custom_layers {
     KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,       KC_J,    KC_L,    KC_U,    KC_Y,    KC_QUOT, \
     KC_A,    KC_R,    KC_S,    KC_T,    KC_G,       KC_M,    KC_N,    KC_E,    KC_I,    KC_O, \
     PT_Z,    KC_X,    KC_C,    KC_D,    KC_V,       KC_K,    KC_H,    KC_COMM, KC_DOT,  PT_SLSH, \
-              LA_EXT,  KC_LSFT, KC_SPC,              KC_ENT,  BSP_SYM, KC_DEL \
+              LA_EXT,  KC_LSFT, KC_SPC,              KC_ENT,  LA_SYM, KC_BSPC \
 )
 
 enum keycodes {
@@ -44,25 +48,31 @@ enum keycodes {
 };
 
 enum combos {
-    ST_NUM,
-    NE_NUM,
+    NUM_LEFT,
+    NUM_RIGHT,
     BN_CAPSWORD,
 };
 
-const uint16_t PROGMEM st_combo[] = {KC_S, KC_T, COMBO_END};
-const uint16_t PROGMEM ne_combo[] = {KC_N, KC_E, COMBO_END};
+#if defined(USE_COLEMAK)
+const uint16_t PROGMEM num_left_combo[]  = {KC_S, KC_T, COMBO_END};
+const uint16_t PROGMEM num_right_combo[] = {KC_N, KC_E, COMBO_END};
+#elif defined(USE_QWERTY)
+const uint16_t PROGMEM num_left_combo[]  = {KC_D, KC_F, COMBO_END};
+const uint16_t PROGMEM num_right_combo[] = {KC_J, KC_K, COMBO_END};
+#endif
+
 const uint16_t PROGMEM bn_combo[] = {KC_B, KC_N, COMBO_END};
 
 combo_t key_combos[] = {
-    [ST_NUM]       = COMBO(st_combo, MO(NUM)),
-    [NE_NUM]       = COMBO(ne_combo, MO(NUM)),
-    [BN_CAPSWORD]  = COMBO(bn_combo, CW_TOGG),
+    [NUM_LEFT]       = COMBO(num_left_combo, MO(NUM)),
+    [NUM_RIGHT]      = COMBO(num_right_combo, MO(NUM)),
+    [BN_CAPSWORD]    = COMBO(bn_combo, CW_TOGG),
 };
 
 bool get_combo_must_hold(uint16_t combo_index, combo_t *combo) {
     switch (combo_index) {
-        case ST_NUM:
-        case NE_NUM:
+        case NUM_LEFT:
+        case NUM_RIGHT:
             return true;
         default:
             return false;
@@ -71,7 +81,11 @@ bool get_combo_must_hold(uint16_t combo_index, combo_t *combo) {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+#if defined(USE_COLEMAK)
     [BASE] = COLEMAK,
+#elif defined(USE_QWERTY)
+    [BASE] = QWERTY,
+#endif
 
     [NUM] = LAYOUT_split_3x5_3(
         KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,
